@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            height: 100vh;
+            overflow: hidden; /* Ekran dışına çıkmasını engeller */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #dot {
+            width: 40px; /* Daha büyük nokta */
+            height: 40px; /* Daha büyük nokta */
+            background-color: white;
+            border-radius: 50%; /* Yuvarlak yapar */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Merkezleme */
+            transition: all 0.8s ease; /* Daha yavaş animasyon */
+        }
+
+        #message {
+            color: white;
+            font-family: 'Press Start 2P', cursive; /* Pixel font */
+            font-size: 16px;
+            text-align: center;
+            margin: 20px;
+            max-width: 80%; /* Metnin taşmasını önler */
+            line-height: 1.5; /* Okunabilirlik için satır aralığı */
+        }
+    </style>
+</head>
+<body>
+    <div id="message">Noktayı yakaladığın zaman sana olan sevgim 0,1 derece düşecek.<br>(Ne olursa olsun bitmeyecek!)</div>
+    <div id="dot"></div>
+
+    <script>
+        const dot = document.getElementById('dot');
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+
+        // Rastgele bir konum oluşturma fonksiyonu
+        function getRandomPosition() {
+            const maxX = screenWidth - 60; // Noktanın yeni genişliğini hesaba kat
+            const maxY = screenHeight - 60; // Noktanın yeni yüksekliğini hesaba kat
+            const newX = Math.floor(Math.random() * maxX);
+            const newY = Math.floor(Math.random() * maxY);
+            return { x: newX, y: newY };
+        }
+
+        // Mouse üzerine gelince yer değiştirme
+        dot.addEventListener('mouseover', () => {
+            const newPos = getRandomPosition();
+            dot.style.left = newPos.x + 'px';
+            dot.style.top = newPos.y + 'px';
+        });
+
+        // İlk konumlandırma (ekranın ortasında başlar)
+        const initialPos = getRandomPosition();
+        dot.style.left = initialPos.x + 'px';
+        dot.style.top = initialPos.y + 'px';
+    </script>
+</body>
+</html>
